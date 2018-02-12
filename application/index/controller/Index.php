@@ -1,15 +1,45 @@
 <?php
 namespace app\index\controller;
 
-class Index
+use think\Controller;
+
+//SPA应用入口
+
+class Index extends Controller
 {
+    //此处定位到PC端SPA应用
     public function index()
     {
-        return '<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} a{color:#2E5CD5;cursor: pointer;text-decoration: none} a:hover{text-decoration:underline; } body{ background: #fff; font-family: "Century Gothic","Microsoft yahei"; color: #333;font-size:18px;} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.6em; font-size: 42px }</style><div style="padding: 24px 48px;"> <h1>:) 2018新年快乐</h1><p> ThinkPHP V5.1<br/><span style="font-size:30px">12载初心不改（2006-2018） - 你值得信赖的PHP框架</span></p></div><script type="text/javascript" src="https://tajs.qq.com/stats?sId=64890268" charset="UTF-8"></script><script type="text/javascript" src="https://e.topthink.com/Public/static/client.js"></script><think id="eab4b9f840753f8e7"></think>';
+        return $this -> fetch();
     }
 
-    public function hello($name = 'ThinkPHP5')
+
+
+    //此处定位到移动端SPA应用
+    public function mobile()
     {
-        return 'hello,' . $name;
+        return $this -> fetch();
+    }
+
+
+
+    //未定义路由指定的404页面
+    public function miss()
+    {
+        //获取请求方式
+        $method = $this -> request ->method();
+
+        //GET方式时返回404页面
+        if ($method == 'GET') 
+        {
+            return $this -> fetch();
+        }
+
+        //POST方式时返回404信息
+        else
+        {
+            return response('error : page not found!','404',['error','page not found!']) -> contentType("text/plain");
+        }
+        
     }
 }

@@ -1,15 +1,9 @@
 <?php
 namespace app\index\controller;
 
-class Api{
-	
+//API
+
+class Api
+{
+    //TODO
 }
-
-
-
-
-
-
-
-
-?>
